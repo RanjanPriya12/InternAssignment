@@ -4,17 +4,7 @@ import { useState } from 'react';
 import './Form.css';
 
 export const Form = () => {
-//     const initialstate=
-// {
-// title:"",
-// image:"",
-// price:"",
-// discount:"",
-// category:"",
-// rating:"",
-// reataurant:"",
-// description:""
-// };
+
     const [formData,setFormData]=useState({
         title:"",
 image:"",
@@ -36,7 +26,8 @@ description:""
 
     const submitHandler=(e)=>{
         e.preventDefault();
-        axios.post(`http://priyaappfood.herokuapp.com/foods`,formData)
+        axios.post(`http://priyaappfood.herokuapp.com/foods`,formData);
+        setFormData('');
     }
   return (
     <div className='formContainer'>

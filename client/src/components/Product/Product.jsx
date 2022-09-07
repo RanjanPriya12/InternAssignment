@@ -26,7 +26,6 @@ export const Product = () => {
   return (
     <div className='productContainer'>
        <div className='imageContainer'>
-            <h2>Image of food</h2>
             <img src={product.image} alt="pic" />
             <div>
             <button>Buy Now</button>

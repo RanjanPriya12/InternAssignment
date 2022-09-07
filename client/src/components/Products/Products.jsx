@@ -8,6 +8,7 @@ import './Products.css';
 
 export const Products = () => {
     const [Products,setProducts]=useState([]);
+    const [data,setData]=useState([]);
     const [page,setPage]=useState(1);
     const [totalCount, setTotalCount]=useState(10);
 
@@ -18,6 +19,7 @@ export const Products = () => {
             setTotalCount(Number(res.headers["x-total-count"]));
             console.log(totalCount);
             setProducts(data);
+            setData(data);
         } catch (error) {
             console.log('err',error);
         }
@@ -38,27 +40,27 @@ export const Products = () => {
         console.log(value);
         if (value === "b") {
           setProducts(
-            Products
-              .filter((data) => data.category == "Breakfast")
+            data
+              .filter((el) => el.category == "Breakfast")
           );
         } else if (value === "l") {
           setProducts(
-            Products
-              .filter((data) => data.category == "lunch")
+            data
+              .filter((el) => el.category == "lunch")
           );
         }
         else if (value === "s") {
             setProducts(
-              Products
-                .filter((data) => data.category == "snacks")
+              data
+                .filter((el) => el.category == "snacks")
             );
           } else if (value === "d") {
           setProducts(
-            Products
-              .filter((data) => data.category == "dinner")
+            data
+              .filter((el) => el.category == "dinner")
           );
         }else {
-          setProducts(Products);
+          setProducts(data);
         }
       };
     
