@@ -12,3 +12,14 @@
     width: 95%;
     margin: auto;
 }
+
+.pagination{
+    width: 30%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.pagination>button{
+    width: 120px;
+    margin: 40px;
+}

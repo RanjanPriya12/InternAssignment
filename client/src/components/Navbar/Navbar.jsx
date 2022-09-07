@@ -43,7 +43,7 @@ export const Navbar = () => {
       </li>
       <li>
         <Link className="link" to="/add">
-          Add Diece
+          Add Dish
         </Link>
       </li>
       <li>
