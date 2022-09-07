@@ -7,6 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server":"nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RanjanPriya12/InternAssignment.git"
+  },
   "engines": {
     "node": "16.15.0"
   },

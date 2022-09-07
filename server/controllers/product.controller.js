@@ -21,6 +21,15 @@ router.get('/',async(req,res)=>{
     }
 });
 
+router.get('/:id',async(req,res)=>{
+    try {
+        const product= await PRODUCT.find(req.params.id).lean().exec();
+        return res.status(200).send(product);
+    } catch (error) {
+        return res.status(400).send({message:error.message});
+    }
+});
+
 router.delete('/:id',async(req,res)=>{
     try {
         const product= await PRODUCT.findByIdAndDelete(req.params.id).lean().exec();
