@@ -16,8 +16,17 @@ function App() {
         <Route path='/' element={<Home/>}></Route>
         <Route path='/products/:id' element={<Product/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
-        <Route path='/add' element={<Form/>}></Route>
+        <Route
+          path=""
+          element={
+            <RequiredAuth>
+              <Form />
+            </RequiredAuth>
+          }
+        />
+        {/* <Route path='/add' element={<Form/>}></Route> */}
       </Routes>
+      
     </div>
   );
 }

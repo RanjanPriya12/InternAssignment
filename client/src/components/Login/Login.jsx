@@ -1,10 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import './Login.css';
 
 export const Login = () => {
   const navigate=useNavigate();
+  const {isAuthorized,logIn}=useContext(AuthContext);
   const [formData,setFormData]=useState({
     email:"",
 password:""
