@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const { isAuthorized }=useContext(AuthContext);
 
   const getData = async () => {
     try {
@@ -48,7 +50,7 @@ export const Navbar = () => {
       </li>
       <li>
         <Link className="link" to="/login">
-          Login
+          { isAuthorized? "Login" : "LogOut"}
         </Link>
       </li>
     </div>

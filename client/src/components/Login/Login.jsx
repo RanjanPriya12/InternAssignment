@@ -6,7 +6,7 @@ import './Login.css';
 
 export const Login = () => {
   const navigate=useNavigate();
-  const {isAuthorized,logIn}=useContext(AuthContext);
+  const {handleAuth}=useContext(AuthContext);
   const [formData,setFormData]=useState({
     email:"",
 password:""
@@ -24,9 +24,10 @@ const hanldeChange = (e) => {
   const handleSubmit=(e)=>{
     e.preventDefault();
     axios.post(`https://priyaappfood.herokuapp.com/users`,formData);
-    setFormData({email:"",password:""})
-    navigate('/');
-    alert("login successfuly")
+    setFormData({email:"",password:""});
+    handleAuth(true);
+    alert("login successfuly");
+    navigate("/add",{replace:true});
    
   }
 
@@ -34,23 +35,26 @@ const hanldeChange = (e) => {
     <>
     <div className='loginContainer'>
         <div className='loginform'>
-          <form onSubmit={handleSubmit}>
+          <form 
+          onSubmit={handleSubmit}
+          >
           <div>
         <label htmlFor="">Email Id:</label>
         </div>
         <div>
             
-            <input type="email" name="email" value={formData.email} onChange={hanldeChange} placeholder='email...'/>
+            <input type="email" name="email" value={formData.email} onChange={hanldeChange} placeholder='email...' required/>
         </div>
         <div>
         <label htmlFor="">Password:</label>
         </div>
         <div>
             
-            <input type="password" name="password" value={formData.password} onChange={hanldeChange} placeholder='password...'/>
+            <input type="password" name="password" value={formData.password} onChange={hanldeChange} placeholder='password...' required/>
         </div>
         <div>
-            <input type="submit" value="Submit" />
+            {/* <input type="submit" value="Submit" /> */}
+            <button>Submit</button>
         </div>
           </form>
         
