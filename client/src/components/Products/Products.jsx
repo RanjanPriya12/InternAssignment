@@ -10,12 +10,15 @@ export const Products = () => {
     const [Products,setProducts]=useState([]);
     const [data,setData]=useState([]);
     const [page,setPage]=useState(1);
+    const [isLoading,setIsLoading]=useState(true);
     const [totalCount, setTotalCount]=useState(10);
 
     const getData=async()=>{
         try {
             const res=await axios.get(`https://priyaappfood.herokuapp.com/foods?_page=${page}&_limit=10`);
+            console.log(res);
             const data=res.data;
+            setIsLoading(false);
             setTotalCount(Number(res.headers["x-total-count"]));
             console.log(totalCount);
             setProducts(data);
@@ -70,21 +73,20 @@ export const Products = () => {
     },[page]);
   return (
     <>
-    <SortFilter sortHandler={sortHandler} filterHandler={filterHandler}/>
+    {isLoading && (
+        <div>
+          <p style={{color:"red", fontSize:"20px", textAlign:"center"}}>Loading...</p>
+        </div>
+      )}
+    
+    {!isLoading && (<div><SortFilter sortHandler={sortHandler} filterHandler={filterHandler}/>
     <div className='productsContainer'>
         
         {Products.map((el)=>(
              <Link className='link1' key={el._id} to={`/products/${el._id}`}><Cart className="cart" el={el}/></Link>
         ))}
-    </div>
-    <div className='pagination'>
-    <button disabled={page <= 1}
-                    onClick={() => setPage(page - 1)}>Prev</button>
-{page}/{Math.ceil(totalCount/10)}
-                <button disabled={page * 10 > totalCount}
-                    onClick={() => setPage(page + 1)}>Next</button>
-
-            </div>
+    </div></div>)}
+    
     </>
     
   )
