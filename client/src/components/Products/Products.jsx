@@ -9,9 +9,11 @@ import './Products.css';
 export const Products = () => {
     const [Products,setProducts]=useState([]);
     const [data,setData]=useState([]);
-    const [page,setPage]=useState(1);
+    const [page,setPage]=useState(10);
+    const [totalCount, setTotalCount]=useState("");
+    const [postPerPage,setPostPerPage]=useState(10)
     const [isLoading,setIsLoading]=useState(true);
-    const [totalCount, setTotalCount]=useState(10);
+
 
     const getData=async()=>{
         try {
@@ -19,13 +21,27 @@ export const Products = () => {
             console.log(res);
             const data=res.data;
             setIsLoading(false);
-            setTotalCount(Number(res.headers["x-total-count"]));
+            // setTotalCount(Number(res.headers["x-total-count"]));
             console.log(totalCount);
+            setTotalCount(data.length);
             setProducts(data);
             setData(data);
         } catch (error) {
             console.log('err',error);
         }
+    }
+
+    const indexOfLastPage= page+postPerPage;
+    const indexOfFirstPage= indexOfLastPage-postPerPage;
+    const currentPosts= Products.slice(indexOfFirstPage,indexOfLastPage)
+
+    function handlePagePlus()
+    {
+      setPage(page+10)
+    }
+    function handlePageMinus()
+    {
+      setPage(page-10)
     }
 
     const sortHandler = (value) => {
@@ -85,7 +101,21 @@ export const Products = () => {
         {Products.map((el)=>(
              <Link className='link1' key={el._id} to={`/products/${el._id}`}><Cart className="cart" el={el}/></Link>
         ))}
-    </div></div>)}
+    </div>
+    <div className='pagination'>
+    <button disabled={page === 10} onClick={handlePageMinus}>Previous</button>
+    {
+      page < Products.length-6 ?  <button disabled={page === Products.length-10} onClick={handlePagePlus}>Next</button>:null
+    }
+   
+    {/* <button disabled={page <= 1}
+                    onClick={() => setPage(page - 1)}>Prev</button>
+{page}/{Math.ceil(totalCount/10)}
+                <button disabled={page * 10 > totalCount}
+                    onClick={() => setPage(page + 1)}>Next</button> */}
+
+            </div>
+    </div>)}
     
     </>
     
