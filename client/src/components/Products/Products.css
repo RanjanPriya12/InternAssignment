@@ -10,6 +10,7 @@
     align-items: center;
     text-align: center;
     width: 95%;
+    gap: 10px;
     margin: auto;
 }
 
@@ -19,7 +20,18 @@
     margin-top: 30px;
 }
 
-.pagination>button{
-    width: 120px;
-    margin: 40px;
+.paginate{
+    text-align: center;
+    font-size: 18px;
+}
+
+.paginate>span{
+    width: 40px;
+    height: 20px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+    cursor: pointer;
 }
